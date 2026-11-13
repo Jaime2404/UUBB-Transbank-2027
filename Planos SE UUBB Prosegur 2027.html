@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plano eléctrico y de seguridad electrónica — Camión blindado NPR 24 Vcc</title>
+<style>
+:root{--azul:#0b3a6f;--azul2:#134d8c;--gris:#eef2f6;--linea:#c9d3dd;--tinta:#12181f;--rojo:#b5342b}
+*{box-sizing:border-box}
+body{margin:0;background:#dde3ea;color:var(--tinta);font-family:"Segoe UI",Arial,Helvetica,sans-serif;font-size:14px;line-height:1.55}
+
+/* ---------- barra de acciones ---------- */
+.faja{position:sticky;top:0;z-index:60;background:var(--azul);color:#fff;padding:9px 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;box-shadow:0 2px 10px #0003}
+.faja .marca{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.faja .esp{flex:1}
+.btn{border:1px solid #ffffff55;background:#ffffff1a;color:#fff;padding:7px 15px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.06em;text-transform:uppercase;font-family:inherit}
+.btn:hover{background:#fff;color:var(--azul)}
+
+/* ---------- páginas ---------- */
+.pagina{max-width:1060px;margin:20px auto;background:#fff;box-shadow:0 3px 16px #0002;padding:26px 32px}
+.hoja{max-width:1188px;margin:20px auto;background:#fff;box-shadow:0 3px 16px #0002}
+.hoja svg{display:block;width:100%;height:auto}
+
+/* ---------- portada ---------- */
+.portada{padding:0;overflow:hidden}
+.ptop{background:var(--azul);color:#fff;padding:34px 40px 28px}
+.ptop .k{font-size:11px;letter-spacing:.26em;text-transform:uppercase;opacity:.82}
+.ptop h1{margin:14px 0 6px;font-size:29px;line-height:1.16;letter-spacing:.01em}
+.ptop h2{margin:0;font-size:15px;font-weight:500;opacity:.9;letter-spacing:.03em}
+.pcuerpo{padding:28px 40px 36px}
+.rejilla{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--linea);border:1px solid var(--linea);margin:22px 0}
+.rejilla div{background:#fff;padding:9px 13px;font-size:12.5px}
+.rejilla span{display:block;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:#6b7a8a;margin-bottom:2px}
+.rejilla b{font-weight:600}
+.aviso{border-left:4px solid var(--rojo);background:#fdf3f2;padding:12px 16px;font-size:12.5px}
+
+/* ---------- tipografía de cuerpo ---------- */
+h2.sec{font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:var(--azul);border-bottom:2px solid var(--azul);padding-bottom:7px;margin:34px 0 16px}
+h3{font-size:14px;margin:0 0 5px;color:var(--azul)}
+p{margin:0 0 10px}
+ul,ol{margin:0 0 10px;padding-left:20px}
+li{margin-bottom:5px}
+.num{display:grid;grid-template-columns:34px 1fr;gap:12px;margin-bottom:18px;page-break-inside:avoid}
+.num .n{background:var(--azul);color:#fff;font-weight:700;font-size:13px;text-align:center;padding:3px 0;border-radius:3px;height:24px}
+.num p{font-size:13.4px;text-align:justify}
+
+/* ---------- tablas ---------- */
+.tabla{width:100%;border-collapse:collapse;font-size:12.3px;margin:10px 0 18px}
+.tabla th{background:var(--azul);color:#fff;text-align:left;padding:6px 8px;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;border:1px solid var(--azul)}
+.tabla td{border:1px solid var(--linea);padding:6px 8px;vertical-align:top}
+.tabla tr:nth-child(even) td{background:#f7f9fb}
+.tabla .c{text-align:center}
+
+/* ---------- figuras ---------- */
+figure{margin:16px 0;border:1px solid var(--linea);background:#f7f9fb}
+figure img{display:block;width:100%;height:auto}
+figcaption{font-size:11.5px;padding:8px 12px;color:#4a5866;border-top:1px solid var(--linea);background:#fff;font-family:"Courier New",monospace}
+figure.sin-img img{display:none}
+figure.sin-img::before{content:"Coloque el archivo de imagen en la misma carpeta del documento";display:block;padding:52px 16px;text-align:center;font-size:12px;color:#8794a2;border-bottom:1px dashed var(--linea)}
+
+/* ---------- estilos dentro de SVG ---------- */
+.lam text{font-family:"Courier New",monospace}
+.tit{font-family:Arial,sans-serif;font-size:17px;font-weight:700;fill:var(--azul);letter-spacing:.02em}
+.cod{font-family:Arial,sans-serif;font-size:26px;font-weight:700;fill:var(--azul)}
+.tb{font-size:11.5px;font-weight:700;fill:#fff}
+.tbs{font-size:9px;fill:#ffffffcc}
+.rot{font-size:9px;fill:#12181f}
+.rot-b{font-size:9.5px;font-weight:700;fill:var(--azul)}
+.rot-s{font-size:7.6px;fill:#3b4650}
+.rot-bla{font-size:9px;fill:#fff}
+.cota{stroke:var(--rojo);stroke-width:.85;fill:none}
+.cota-t{font-size:9.5px;fill:var(--rojo)}
+.marco{fill:none;stroke:#12181f;stroke-width:2.2}
+.marco-f{fill:none;stroke:#12181f;stroke-width:.85}
+.eje{fill:none;stroke:var(--azul);stroke-width:2.1}
+.eje-f{fill:none;stroke:var(--azul);stroke-width:1}
+.eje-d{fill:none;stroke:var(--azul);stroke-width:1;stroke-dasharray:5 3}
+.eje-p{fill:none;stroke:#8a97a4;stroke-width:1;stroke-dasharray:2 3}
+.caja{fill:#fff;stroke:var(--azul);stroke-width:1.5}
+.caja-g{fill:#eef2f6;stroke:var(--azul);stroke-width:1.2}
+.caja-r{fill:#fdf3f2;stroke:var(--rojo);stroke-width:1.2}
+.sol{fill:var(--azul)}
+.nota{fill:#f7f9fb;stroke:#8a97a4;stroke-width:.7}
+.band{fill:#0b3a6f}
+.band-l{fill:#e8eef4}
+
+@media print{
+ body{background:#fff;font-size:11.5px}
+ .faja{display:none}
+ .pagina,.hoja{margin:0;box-shadow:none;max-width:none}
+ .hoja{page-break-after:always;page-break-inside:avoid}
+ .pagina{page-break-after:always}
+}
+</style>
+</head>
+<body>
+
+<div class="faja">
+  <span class="marca">Planos NPR · Transbank</span>
+  <span class="esp"></span>
+  <button class="btn" onclick="window.print()">PDF</button>
+  <button class="btn" onclick="bajarDXF()">DXF</button>
+  <button class="btn" onclick="bajarSVG()">SVG</button>
+</div>
+
+<!-- ============ SÍMBOLOS BASE ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+
+<g id="marco">
+  <rect x="10" y="10" width="1168" height="820" class="marco"/>
+  <rect x="26" y="26" width="1136" height="788" class="marco-f"/>
+  <rect x="26" y="26" width="1136" height="54" class="band"/>
+  <text x="42" y="48" class="tb">SEGURIDAD ELECTRÓNICA · GESTIÓN DEL RIESGO</text>
+  <text x="42" y="68" class="tbs">COMPAÑÍA COLOMBIANA DE SEGURIDAD · TRANSBANK</text>
+  <text x="1146" y="48" class="tb" text-anchor="end">CAMIÓN BLINDADO NPR · 24 Vcc</text>
+  <text x="1146" y="68" class="tbs" text-anchor="end">TRANSPORTE DE VALORES · NTC 2050 · RETIE</text>
+  <rect x="836" y="712" width="326" height="102" fill="#fff" stroke="#12181f" stroke-width="1.1"/>
+  <line x1="836" y1="740" x2="1162" y2="740" class="marco-f"/>
+  <line x1="836" y1="766" x2="1162" y2="766" class="marco-f"/>
+  <line x1="836" y1="790" x2="1162" y2="790" class="marco-f"/>
+  <line x1="1006" y1="740" x2="1006" y2="814" class="marco-f"/>
+  <text x="844" y="732" class="rot-s">EMPRESA</text>
+  <text x="844" y="757" class="rot-b">TRANSBANK</text>
+  <text x="844" y="780" class="rot-s">ELABORADO POR</text>
+  <text x="844" y="802" class="rot-s">SEGURIDAD ELECTRÓNICA · GESTIÓN DEL RIESGO</text>
+  <text x="1014" y="732" class="rot-s">ESCALA</text>
+  <text x="1014" y="757" class="rot-b">1:50</text>
+  <text x="1014" y="780" class="rot-s">FORMATO</text>
+  <text x="1014" y="802" class="rot-s">A3 · 420 × 297</text>
+  <line x1="26" y1="90" x2="1162" y2="90" class="marco-f"/>
+</g>
+
+<g id="planta">
+  <rect x="200" y="260" width="780" height="260" fill="#fbfcfd" stroke="#12181f" stroke-width="2.2"/>
+  <line x1="369" y1="260" x2="369" y2="520" stroke="#12181f" stroke-width="3"/>
+  <text x="284" y="390" class="rot-b" text-anchor="middle">CABINA</text>
+  <text x="284" y="402" class="rot-s" text-anchor="middle">1 300 mm</text>
+  <text x="675" y="248" class="rot-b" text-anchor="middle">FURGÓN BLINDADO · 4 700 mm</text>
+  <rect x="296" y="248" width="46" height="16" fill="#3b4650"/>
+  <rect x="296" y="516" width="46" height="16" fill="#3b4650"/>
+  <rect x="760" y="248" width="46" height="16" fill="#3b4650"/>
+  <rect x="760" y="516" width="46" height="16" fill="#3b4650"/>
+  <line x1="205" y1="260" x2="205" y2="520" stroke="#12181f" stroke-width="4"/>
+  <circle cx="675" cy="390" r="22" class="eje-f" fill="#fff"/>
+  <text x="675" y="393" class="rot-s" text-anchor="middle">ESC</text>
+  <rect x="371" y="285" width="8" height="117" fill="#fff" stroke="#12181f" stroke-width="1.6"/>
+  <path d="M379 285 A117 117 0 0 1 379 402" class="eje-d" fill="none"/>
+  <text x="392" y="279" class="rot-s">PUERTA DE COFRE 900 mm</text>
+  <rect x="371" y="410" width="8" height="104" fill="#fff" stroke="#12181f" stroke-width="1.6"/>
+  <text x="392" y="524" class="rot-s">PUERTA DE CONTINGENCIA 800 mm</text>
+  <rect x="620" y="254" width="80" height="10" fill="#fff" stroke="#12181f" stroke-width="1.6"/>
+  <rect x="620" y="516" width="80" height="10" fill="#fff" stroke="#12181f" stroke-width="1.6"/>
+  <text x="660" y="238" class="rot-s" text-anchor="middle">PUERTA LATERAL</text>
+  <text x="660" y="545" class="rot-s" text-anchor="middle">PUERTA LATERAL</text>
+  <line x1="165" y1="260" x2="165" y2="520" class="cota"/>
+  <line x1="158" y1="260" x2="172" y2="260" class="cota"/>
+  <line x1="158" y1="520" x2="172" y2="520" class="cota"/>
+  <text x="157" y="394" class="cota-t" text-anchor="middle" transform="rotate(-90 157 394)">2 000</text>
+  <line x1="200" y1="562" x2="980" y2="562" class="cota"/>
+  <line x1="200" y1="555" x2="200" y2="569" class="cota"/>
+  <line x1="980" y1="555" x2="980" y2="569" class="cota"/>
+  <text x="590" y="576" class="cota-t" text-anchor="middle">6 000 TOTAL</text>
+</g>
+
+<g id="sim-cam">
+  <rect x="-7" y="-5" width="14" height="10" class="sol"/>
+  <path d="M7 -5 L13 -9 L13 9 L7 5 Z" class="sol"/>
+</g>
+
+<g id="sim-panico">
+  <rect x="-8" y="-8" width="16" height="16" fill="#fff" stroke="var(--rojo)" stroke-width="1.8"/>
+  <circle cx="0" cy="0" r="3.4" class="sol" style="fill:#b5342b"/>
+</g>
+
+<g id="sim-led">
+  <circle cx="0" cy="0" r="4.2" fill="#fff" stroke="#12181f" stroke-width="1.3"/>
+  <path d="M-6 -6 L-9 -9 M6 -6 L9 -9" stroke="#12181f" stroke-width="1.1"/>
+</g>
+
+<g id="sim-puls">
+  <circle cx="0" cy="0" r="7" fill="#fff" stroke="#12181f" stroke-width="1.5"/>
+  <line x1="-9.5" y1="0" x2="-7" y2="0" stroke="#12181f" stroke-width="1.4"/>
+  <line x1="9.5" y1="0" x2="7" y2="0" stroke="#12181f" stroke-width="1.4"/>
+</g>
+
+</defs></svg>
+
+<!-- ============ PORTADA ============ -->
+<section class="pagina portada">
+  <div class="ptop">
+    <div class="k">Seguridad electrónica · Gestión del riesgo</div>
+    <h1>Plano eléctrico y de seguridad electrónica</h1>
+    <h2>Camión blindado NPR 24 Vcc · Transporte de valores</h2>
+  </div>
+  <div class="pcuerpo">
+    <div class="rejilla">
+      <div><span>Empresa</span><b>Transbank</b></div>
+      <div><span>Elaborado por</span><b>Seguridad Electrónica · Gestión del Riesgo</b></div>
+      <div><span>Vehículo</span><b>NPR blindado · 6 000 × 2 000 mm</b></div>
+      <div><span>Sistema</span><b>24 Vcc · negativo a chasis</b></div>
+      <div><span>Contenido</span><b>Memoria técnica + 10 láminas L-01 a L-10</b></div>
+      <div><span>Revisión</span><b>Rev. 2</b></div>
+    </div>
+    <p style="font-size:13px">El documento reúne la memoria de diseño y el juego completo de láminas del sistema eléctrico, de control de esclusa, de bóveda y de CCTV del vehículo. Toda la instalación se resuelve en 24 Vcc con negativo a chasis, protecciones coordinadas y banco de respaldo con OR de diodos.</p>
+    <div class="aviso"><b>Cinco aberturas controladas:</b> dos puertas laterales, puerta de cofre, puerta de contingencia y escotilla. La tarjeta de esclusa verifica las cinco cerradas antes de habilitar cualquier maniobra.</div>
+  </div>
+</section>
+
+<!-- ============ ÍNDICE Y DATOS ============ -->
+<section class="pagina">
+  <h2 class="sec">Contenido del documento</h2>
+  <table class="tabla">
+    <thead><tr><th style="width:80px">Lámina</th><th>Denominación</th><th style="width:90px" class="c">Escala</th></tr></thead>
+    <tbody>
+      <tr><td class="c">L-01</td><td>Planta de conjunto y localización de equipos</td><td class="c">1:50</td></tr>
+      <tr><td class="c">L-02</td><td>Planta de canalizaciones, cajas C1 y C2</td><td class="c">1:50</td></tr>
+      <tr><td class="c">L-03</td><td>Diagrama unifilar de alimentación y protecciones</td><td class="c">S/E</td></tr>
+      <tr><td class="c">L-04</td><td>Esquema del banco de respaldo y regulador 24/12</td><td class="c">S/E</td></tr>
+      <tr><td class="c">L-05</td><td>Lazo de esclusa · matriz OR de pánicos</td><td class="c">S/E</td></tr>
+      <tr><td class="c">L-06</td><td>Circuito de cofre · doble solenoide y Cencon</td><td class="c">S/E</td></tr>
+      <tr><td class="c">L-07</td><td>CCTV y audio · seis canales y dos monitores</td><td class="c">S/E</td></tr>
+      <tr><td class="c">L-08</td><td>Tablero de control C2 · pulsadores y LED</td><td class="c">1:5</td></tr>
+      <tr><td class="c">L-09</td><td>Detalle de cajas C1 y C2 y pasos de muro</td><td class="c">1:10</td></tr>
+      <tr><td class="c">L-10</td><td>Cuadro de cargas y lista de materiales</td><td class="c">S/E</td></tr>
+    </tbody>
+  </table>
+
+  <h2 class="sec">Datos de diseño</h2>
+  <table class="tabla">
+    <tbody>
+      <tr><th style="width:290px">Tensión de servicio</th><td>24 Vcc, negativo a chasis</td></tr>
+      <tr><th>Corriente de la principal</th><td>15 A · conductor 12 AWG THHN/MTW</td></tr>
+      <tr><th>Caída de tensión admitida</th><td>1,5 % máximo en el ramal más desfavorable</td></tr>
+      <tr><th>Respaldo</th><td>2 × 12 V en serie, 3 diodos de bloqueo de 35 A</td></tr>
+      <tr><th>Alimentación de tarjetas</th><td>Regulador 24 V a 12 V, 5 A, con disipador</td></tr>
+      <tr><th>Canalización de señal</th><td>Cable de alarma de 5 hilos por abertura</td></tr>
+      <tr><th>Canalización de CCTV</th><td>UTP Cat 6 directo al grabador, un cable por cámara</td></tr>
+      <tr><th>Grado de protección</th><td>IP 54 en cajas · PG7 con sellante PU en perforaciones</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ MEMORIA TÉCNICA ============ -->
+<section class="pagina">
+  <h2 class="sec">Memoria técnica de diseño</h2>
+
+  <div class="num"><div class="n">1</div><div>
+    <h3>Objeto y alcance</h3>
+    <p>Definir el diseño eléctrico y de seguridad electrónica del camión blindado NPR destinado al transporte de valores, con el fin de controlar las cinco aberturas del furgón, proteger la bóveda, sostener la vigilancia por video y garantizar la continuidad de la alimentación ante falla del vehículo. El alcance cubre desde la toma de la batería principal hasta cada carga terminal, incluidas canalizaciones, cajas, protecciones y puesta a tierra.</p>
+  </div></div>
+
+  <div class="num"><div class="n">2</div><div>
+    <h3>Normativa aplicable</h3>
+    <p>NTC 2050 para instalaciones eléctricas, RETIE para el régimen de instalaciones, IEC 60529 para grados de protección, SAE J1128 para conductores automotrices y NTC 4516 para señalización. Los criterios de ampacidad y caída de tensión se aplican con margen sobre el mínimo normativo por tratarse de una instalación móvil sometida a vibración.</p>
+  </div></div>
+
+  <div class="num"><div class="n">3</div><div>
+    <h3>Características del vehículo</h3>
+    <p>Largo total 6 000 mm, de los cuales 4 700 mm corresponden al furgón y 1 300 mm a la cabina, con ancho útil de 2 000 mm. Blindaje perimetral, mamparo de separación con puerta de cofre al centro y puerta de contingencia a su derecha, escotilla centrada en el techo y dos puertas laterales en la zona central, una por costado. Cuatro ruedas, con eje delantero y eje trasero reubicados para conservar la distribución de carga.</p>
+  </div></div>
+
+  <div class="num"><div class="n">4</div><div>
+    <h3>Arquitectura general</h3>
+    <p>El sistema se organiza en cuatro bloques independientes: alimentación y respaldo, control de esclusa, control de bóveda y CCTV con audio. La independencia es funcional y también eléctrica: la red de sensores pertenece a la esclusa, a la tarjeta de bóveda y al rastreador, mientras el grabador recibe únicamente video. Un fallo en el CCTV no afecta la lógica de las cerraduras.</p>
+  </div></div>
+
+  <div class="num"><div class="n">5</div><div>
+    <h3>Alimentación principal de 24 Vcc</h3>
+    <p>La toma se hace en el borne positivo de la batería del vehículo a través de un fusible ANL de 60 A y un seccionador de corte general. El conductor principal es Centelsa THHN/MTW 12 AWG, con recorrido por canaleta metálica y separación de 100 mm respecto de los ramales de señal. El negativo se toma en el chasis con terminal de compresión y tornillo de 8 mm.</p>
+  </div></div>
+
+  <div class="num"><div class="n">6</div><div>
+    <h3>Protecciones y selectividad</h3>
+    <p>Cada ramal lleva automático propio Q0 a Q11 y fusible térmico FT-01 a FT-05 en las cargas inductivas de mayor consumo. La gradación es descendente desde el ANL de 60 A, de modo que una falla en un ramal abre solo su protección. Los automáticos de las tarjetas son de 3 A y los de los solenoides de 10 A con curva adecuada al pico de enclavamiento.</p>
+  </div></div>
+
+  <div class="num"><div class="n">7</div><div>
+    <h3>Banco de respaldo y OR de diodos</h3>
+    <p>El banco se compone de dos baterías de 12 V en serie, alojadas en bandeja aislada dentro de C1, con carga y descarga conducidas por tres diodos de 35 A dispuestos en OR. La configuración impide el retorno hacia la instalación del camión y permite que, al apagarse el vehículo, el sistema de seguridad siga alimentado durante el tiempo de maniobra. Los diodos van sobre disipador y con terminales engastados.</p>
+  </div></div>
+
+  <div class="num"><div class="n">8</div><div>
+    <h3>Regulador 24 V a 12 V</h3>
+    <p>Las tarjetas electrónicas trabajan en 12 V, por lo que se interpone un regulador reductor de 5 A con disipador y protección térmica, alimentado desde el ramal protegido y con su propia masa al chasis. La salida de 12 V alimenta exclusivamente las tarjetas de esclusa y de bóveda; ningún otro consumo se cuelga de ese ramal para no degradar la regulación.</p>
+  </div></div>
+
+  <div class="num"><div class="n">9</div><div>
+    <h3>Lógica de esclusa</h3>
+    <p>La tarjeta con microcontrolador verifica en forma simultánea que las cinco aberturas estén cerradas y que la Cencon esté activada; solo con esa condición AND habilita la maniobra de la bóveda y el desbloqueo del cofre. Si una abertura se abre durante la maniobra, la tarjeta deshabilita la salida y obliga a repetir la secuencia completa.</p>
+  </div></div>
+
+  <div class="num"><div class="n">10</div><div>
+    <h3>Matriz OR de pánicos</h3>
+    <p>Los cuatro pánicos se agrupan en una matriz OR con diodos 1N4007 de cátodo común hacia la entrada de la tarjeta y resistencia de pull-up de 4,7 kΩ a positivo. Así, la activación de cualquiera de los cuatro lleva la entrada a nivel bajo sin realimentar a los otros tres. El conjunto se aloja en bornera de paso para permitir el mantenimiento individual sin desarmar la matriz.</p>
+  </div></div>
+
+  <div class="num"><div class="n">11</div><div>
+    <h3>Cofre: doble solenoide y Cencon</h3>
+    <p>El cofre dispone de dos solenoides, uno por cada camino de mando, con diodos 6A10 de aislamiento y cátodo al pin auxiliar de la tarjeta. El pasador con solenoide bloquea el varillaje del cofre. La Cencon Caba Mas SC-01 y SC-02 se cablea al mismo bloque de mando, de modo que el cofre solo se libera con la secuencia de esclusa cumplida y la Cencon activada.</p>
+  </div></div>
+
+  <div class="num"><div class="n">12</div><div>
+    <h3>Bóveda y tarjeta independiente</h3>
+    <p>La bóveda cuenta con tarjeta propia, separada de la de esclusa, alimentada por el mismo regulador pero con protección y bornera independientes. La liberación exige la Cencon activada y las cinco aberturas cerradas. La separación evita que una intervención sobre la esclusa deje la bóveda sin control.</p>
+  </div></div>
+
+  <div class="num"><div class="n">13</div><div>
+    <h3>Bornera de paso X2 y barra de puenteo</h3>
+    <p>La bornera X2 concentra los retornos de las cinco aberturas y la matriz de pánicos. Lleva barra de puenteo para el común y numeración por abertura, lo que permite aislar un circuito con puente extraíble sin soltar cable de campo. La bornera va rotulada y con tapa transparente.</p>
+  </div></div>
+
+  <div class="num"><div class="n">14</div><div>
+    <h3>CCTV</h3>
+    <p>Seis canales fijos: CH1 frontal, CH2 posterior, CH3 copiloto, CH4 conductor, CH5 tripulación y CH6 cofre. Cada cámara llega al grabador por su propio UTP Cat 6, sin balunes ni HDMI. Las dos pantallas tendrán conexión al MVR por un único cable UTP. El grabador va en C1 sobre base antivibratoria.</p>
+  </div></div>
+
+  <div class="num"><div class="n">15</div><div>
+    <h3>Audio</h3>
+    <p>Dos micrófonos: MIC-01 junto a CAM-03 y MIC-02 junto a MON-02. El audio viaja por el par libre del mismo UTP de la cámara asociada y entra al canal correspondiente del grabador, con lo que se conserva la sincronía entre imagen y sonido.</p>
+  </div></div>
+
+  <div class="num"><div class="n">16</div><div>
+    <h3>Pánicos y señalización de estado</h3>
+    <p>Los cuatro pánicos van en las paredes del furgón, a 1 100 mm del piso, con pulsador protegido. Cinco LED de estado, con ánodos al positivo y cátodo por resistencia a la tarjeta, indican cerrado, abierto, habilitado, falla y respaldo. El relé K0 opera como candado de la lógica y solo cierra con la secuencia completa.</p>
+  </div></div>
+
+  <div class="num"><div class="n">17</div><div>
+    <h3>Canalizaciones y pasos de muro</h3>
+    <p>Las perforaciones se identifican H-1 en el mamparo y H-2 en el piso, ambas con prensaestopas PG7 y sellante de poliuretano. La canalización de señal va en tubería flexible con separación de 100 mm de los ramales de potencia y cruces a 90°. Todo paso de muro se sella después de probar continuidad.</p>
+  </div></div>
+
+  <div class="num"><div class="n">18</div><div>
+    <h3>Puesta a tierra, pruebas y recepción</h3>
+    <p>Las cajas C1 y C2 se aterrizan al chasis con conductor de 12 AWG y terminal de compresión. La recepción incluye prueba de continuidad de cada hilo, medición de aislamiento, verificación de la matriz de pánicos uno por uno, prueba de la secuencia AND con las cinco aberturas y prueba de autonomía del banco de respaldo. Se entrega acta con registro de valores.</p>
+  </div></div>
+</section>
+
+<!-- ============ VISTAS ============ -->
+<section class="pagina">
+  <h2 class="sec">Vistas de referencia del vehículo</h2>
+  <figure>
+    <img src="img_camion_transbank_exterior.jpg" alt="Vista exterior del camión blindado" onerror="this.closest('figure').classList.add('sin-img')">
+    <figcaption>img_camion_transbank_exterior.jpg — Vista exterior de referencia. Blindaje perimetral, dos puertas laterales en la zona central y escotilla centrada en el techo.</figcaption>
+  </figure>
+  <figure>
+    <img src="img_camion_transbank_interior.jpg" alt="Vista interior del furgón blindado" onerror="this.closest('figure').classList.add('sin-img')">
+    <figcaption>img_camion_transbank_interior.jpg — Vista interior de referencia. Mamparo con puerta de cofre al centro, contingencia a la derecha, cajas C1 y C2 y pánicos en pared.</figcaption>
+  </figure>
+  <p style="font-size:12.5px">Ambos archivos se guardan en la misma carpeta del documento, con el nombre exacto indicado en el pie de figura.</p>
+</section>
+
+<!-- ============ L-01 ============ -->
+<div class="hoja">
+<svg viewBox="0 0 1188 840">
+  <use href="#marco"/>
+  <text x="42" y="118" class="tit">01 · PLANTA DE CONJUNTO Y LOCALIZACIÓN DE EQUIPOS</text>
+  <text x="42" y="136" class="rot-s">ESCALA 1:50 · COTAS EN MILÍMETROS · PLANTA SUPERIOR SIN TECHO</text>
+  <text x="42" y="806" class="cod">L-01</text>
+  <use href="#planta"/>
+
+  <g>
+    <use href="#sim-panico" transform="translate(405 260)"/>
+    <text x="405" y="286" class="rot-b" text-anchor="middle">P1</text>
+    <use href="#sim-panico" transform="translate(950 260)"/>
+    <text x="950" y="286" class="rot-b" text-anchor="middle">P2</text>
+    <use href="#sim-panico" transform="translate(405 520)"/>
+    <text x="405" y="511" class="rot-b" text-anchor="middle">P3</text>
+    <use href="#sim-panico" transform="translate(950 520)"/>
+    <text x="950" y="511" class="rot-b" text-anchor="middle">P4</text>
+  </g>
+
+  <g>
+    <use href="#sim-cam" transform="translate(214 390)"/>
+    <text x="214" y="376" class="rot-s" text-anchor="middle">CAM-01 CH1</text>
+    <use href="#sim-cam" transform="translate(966 390) rotate(180)"/>
+    <text x="966" y="376" class="rot-s" text-anchor="middle">CAM-02 CH2</text>
+    <use href="#sim-cam" transform="translate(340 268)"/>
+    <text x="340" y="292" class="rot-s" text-anchor="middle">CAM-03 CH3</text>
+    <use href="#sim-cam" transform="translate(340 512) rotate(180)"/>
+    <text x="340" y="503" class="rot-s" text-anchor="middle">CAM-04 CH4</text>
+    <use href="#sim-cam" transform="translate(480 268)"/>
+    <text x="480" y="292" class="rot-s" text-anchor="middle">CAM-05 CH5</text>
+    <use href="#sim-cam" transform="translate(950 512) rotate(180)"/>
+    <text x="950" y="500" class="rot-s" text-anchor="middle">CAM-06 CH6</text>
+  </g>
+
+  <g>
+    <circle cx="356" cy="278" r="4" class="sol"/>
+    <text x="366" y="281" class="rot-s">MIC-01</text>
+    <circle cx="676" cy="430" r="4" class="sol"/>
+    <text x="686" y="433" class="rot-s">MIC-02</text>
+  </g>
+
+  <rect x="240" y="368" width="44" height="26" class="caja-g"/>
+  <text x="262" y="384" class="rot-s" text-anchor="middle">MON-01</text>
+  <rect x="648" y="418" width="58" height="34" class="caja-g"/>
+  <text x="677" y="438" class="rot-s" text-anchor="middle">MON-02</text>
+
+  <rect x="880" y="272" width="85" height="80" class="caja"/>
+  <text x="922" y="300" class="rot-b" text-anchor="middle">C1</text>
+  <text x="922" y="314" class="rot-s" text-anchor="middle">BATERÍAS 2×12 V</text>
+  <text x="922" y="326" class="rot-s" text-anchor="middle">DIODOS 35 A · REGULADOR</text>
+  <text x="922" y="338" class="rot-s" text-anchor="middle">GRABADOR · RASTREADOR</text>
+
+  <rect x="560" y="440" width="80" height="66" class="caja"/>
+  <text x="600" y="466" class="rot-b" text-anchor="middle">C2</text>
+  <text x="600" y="480" class="rot-s" text-anchor="middle">PULSADORES</text>
+  <text x="600" y="492" class="rot-s" text-anchor="middle">Y LED</text>
+
+  <line x1="922" y1="272" x2="900" y2="240" class="eje-f"/>
+  <line x1="900" y1="240" x2="900" y2="228" class="eje"/>
+  <text x="894" y="224" class="rot-s" text-anchor="end">ANTENA GSM+GPS · MVR</text>
+  <line x1="940" y1="272" x2="952" y2="240" class="eje-f"/>
+  <line x1="952" y1="240" x2="952" y2="228" class="eje"/>
+  <text x="958" y="224" class="rot-s">ANTENA GPS+GSM · RASTREADOR</text>
+
+  <rect x="34" y="596" width="700" height="106" class="nota"/>
+  <text x="44" y="614" class="rot-b">NOTAS</text>
+  <text x="44" y="630" class="rot-s">1. Cotas en milímetros. Verificar en obra con el vehículo nivelado y sin carga.</text>
+  <text x="44" y="644" class="rot-s">2. Pánicos a 1 100 mm del piso terminado, sobre pared lateral y en zona protegida.</text>
+  <text x="44" y="658" class="rot-s">3. Antenas sobre la vertical de C1, separadas 400 mm entre sí y de la chapa del techo.</text>
+  <text x="44" y="672" class="rot-s">4. MON-01 en tablero frente al conductor; MON-02 en mamparo, junto a MIC-02.</text>
+  <text x="44" y="686" class="rot-s">5. Puerta de cofre al centro del mamparo con 60 mm de holgura a las sillas de tripulación.</text>
+  <text x="44" y="700" class="rot-s">6. Canalización por piso y pared, oculta en el blindaje. No perforar travesaños.</text>
+
+  <rect x="750" y="596" width="240" height="106" class="nota"/>
+  <text x="760" y="614" class="rot-b">SÍMBOLOS</text>
+  <use href="#sim-cam" transform="translate(772 632)"/>
+  <text x="790" y="635" class="rot-s">Cámara de video</text>
+  <use href="#sim-panico" transform="translate(772 654)"/>
+  <text x="790" y="657" class="rot-s">Pulsador de pánico</text>
+  <use href="#sim-led" transform="translate(772 676)"/>
+  <text x="790" y="679" class="rot-s">LED de estado</text>
+  <rect x="766" y="690" width="12" height="9" class="caja"/>
+  <text x="790" y="699" class="rot-s">Caja de equipos</text>
+</svg>
+</div>
+
+<!-- ============ L-02 ============ -->
+<div class="hoja">
+<svg viewBox="0 0 1188 840">
+  <use href="#marco"/>
+  <text x="42" y="118" class="tit">02 · PLANTA DE CANALIZACIONES, CAJAS C1 Y C2</text>
+  <text x="42" y="136" class="rot-s">ESCALA 1:50 · TUBERÍA FLEXIBLE Y CABLE DE ALARMA DE 5 HILOS</text>
+  <text x="42" y="806" class="cod">L-02</text>
+  <use href="#planta"/>
+
+  <path d="M369 460 L520 460 L520 470 L560 470" class="eje"/>
+  <path d="M640 470 L760 470 L760 400 L880 400" class="eje"/>
+  <path d="M880 320 L840 320 L840 275 L700 275 L600 275 L600 440" class="eje-d"/>
+  <path d="M880 360 L820 360 L820 505 L640 505" class="eje-d"/>
+  <path d="M405 268 L405 300 L520 300 L520 440" class="eje-f"/>
+  <path d="M950 268 L950 250 L1000 250 L1000 430 L965 430 L965 352" class="eje-f"/>
+
+  <circle cx="520" cy="455" r="4" fill="#fff" stroke="var(--azul)" stroke-width="1.4"/>
+  <circle cx="760" cy="470" r="4" fill="#fff" stroke="var(--azul)" stroke-width="1.4"/>
+  <circle cx="840" cy="300" r="4" fill="#fff" stroke="var(--azul)" stroke-width="1.4"/>
+  <circle cx="820" cy="440" r="4" fill="#fff" stroke="var(--azul)" stroke-width="1.4"/>
+
+  <rect x="880" y="272" width="85" height="80" class="caja"/>
+  <text x="922" y="316" class="rot-b" text-anchor="middle">C1</text>
+  <rect x="560" y="440" width="80" height="66" class="caja"/>
+  <text x="600" y="476" class="rot-b" text-anchor="middle">C2</text>
+
+  <line x1="369" y1="452" x2="369" y2="468" stroke="#12181f" stroke-width="6"/>
+  <text x="352" y="500" class="rot-b">H-1</text>
+  <text x="352" y="512" class="rot-s">PG7 + PU</text>
+  <circle cx="700" cy="470" r="5" fill="none" stroke="#12181f" stroke-width="1.6"/>
+  <text x="712" y="486" class="rot-b">H-2</text>
+  <text x="712" y="498" class="rot-s">PG7 + PU</text>
+
+  <rect x="34" y="596" width="700" height="106" class="nota"/>
+  <text x="44" y="614" class="rot-b">ESPECIFICACIÓN DE CANALIZACIÓN</text>
+  <text x="44" y="630" class="rot-s">1. Potencia: Centelsa THHN/MTW 12 AWG en tubería flexible de 1/2".</text>
+  <text x="44" y="644" class="rot-s">2. Señal: cable de alarma de 5 hilos, uno por abertura, sin empalmes intermedios.</text>
+  <text x="44" y="658" class="rot-s">3. Separación mínima de 100 mm entre potencia y señal; cruces a 90°.</text>
+  <text x="44" y="672" class="rot-s">4. CCTV: UTP Cat 6, un cable por cámara, directo al grabador en C1.</text>
+  <text x="44" y="686" class="rot-s">5. Perforaciones H-1 y H-2 con prensaestopas PG7 y sellante de poliuretano.</text>
+  <text x="44" y="700" class="rot-s">6. Radio de curvatura mínimo: 10 veces el diámetro exterior del cable.</text>
+
+  <rect x="750" y="596" width="240" height="106" class="nota"/>
+  <text x="760" y="614" class="rot-b">CONVENCIÓN</text>
+  <line x1="760" y1="632" x2="800" y2="632" class="eje"/>
+  <text x="808" y="635" class="rot-s">Potencia</text>
+  <line x1="760" y1="654" x2="800" y2="654" class="eje-d"/>
+  <text x="808" y="657" class="rot-s">Señal</text>
+  <line x1="760" y1="676" x2="800" y2="676" class="eje-f"/>
+  <text x="808" y="679" class="rot-s">CCTV</text>
+  <circle cx="780" cy="696" r="4" fill="#fff" stroke="var(--azul)" stroke-width="1.4"/>
+  <text x="808" y="699" class="rot-s">Caja de paso</text>
+</svg>
+</div>
+
+<!-- ============ L-03 ============ -->
+<div class="hoja">
+<svg viewBox="0 0 1188 840">
+  <use href="#marco"/>
+  <text x="42" y="118" class="tit">03 · DIAGRAMA UNIFILAR DE ALIMENTACIÓN Y PROTECCIONES</text>
+  <text x="42" y="136" class="rot-s">SIN ESCALA · 24 Vcc · NEGATIVO A CHASIS</text>
+  <text x="42" y="806" class="cod">L-03</text>
+
+  <rect x="60" y="230" width="120" height="60" class="caja"/>
+  <text x="120" y="256" class="rot-b" text-anchor="middle">BATERÍA</text>
+  <text x="120" y="270" class="rot-s" text-anchor="middle">VEHÍCULO 24 V</text>
+
+  <line x1="180" y1="260" x2="230" y2="260" class="eje"/>
+  <rect x="230" y="244" width="26" height="32" class="caja-r"/>
+  <text x="243" y="238" class="rot-s" text-anchor="middle">ANL 60 A</text>
+
+  <line x1="256" y1="260" x2="306" y2="260" class="eje"/>
+  <line x1="306" y1="246" x2="306" y2="274" class="eje"/>
+  <line x1="316" y1="250" x2="330" y2="270" class="eje"/>
+  <text x="318" y="238" class="rot-s" text-anchor="middle">QS-1 CORTE</text>
+
+  <line x1="316" y1="260" x2="400" y2="260" class="eje"/>
+  <text x="360" y="250" class="rot-s" text-anchor="middle">12 AWG THHN</text>
+  <text x="360" y="278" class="rot-s" text-anchor="middle">15 A · 1,5 %</text>
+
+  <rect x="400" y="180" width="20" height="300" class="band"/>
+  <text x="410" y="172" class="rot-b" text-anchor="middle">BORNERA X1</text>
+
+  <g class="eje">
+    <line x1="420" y1="210" x2="470" y2="210"/>
+    <line x1="420" y1="270" x2="470" y2="270"/>
+    <line x1="420" y1="330" x2="470" y2="330"/>
+    <line x1="420" y1="390" x2="470" y2="390"/>
+    <line x1="420" y1="450" x2="470" y2="450"/>
+  </g>
+
+  <g>
+    <rect x="470" y="198" width="24" height="24" class="caja"/><text x="482" y="192" class="rot-s" text-anchor="middle">Q0 3 A</text>
+    <rect x="470" y="258" width="24" height="24" class="caja"/><text x="482" y="252" class="rot-s" text-anchor="middle">Q1 3 A</text>
+    <rect x="470" y="318" width="24" height="24" class="caja"/><text x="482" y="312" class="rot-s" text-anchor="middle">Q2 10 A</text>
+    <rect x="470" y="378" width="24" height="24" class="caja"/><text x="482" y="372" class="rot-s" text-anchor="middle">Q3 10 A</text>
+    <rect x="470" y="438" width="24" height="24" class="caja"/><text x="482" y="432" class="rot-s" text-anchor="middle">Q4 5 A</text>
+  </g>
+
+  <line x1="494" y1="210" x2="560" y2="210" class="eje"/>
+  <rect x="560" y="194" width="150" height="34" class="caja-g"/>
+  <text x="635" y="216" class="rot-s" text-anchor="middle">REGULADOR 24/12 V · 5 A</text>
+
+  <line x1="710" y1="210" x2="770" y2="210" class="eje"/>
+  <rect x="770" y="192" width="130" height="38" class="caja"/>
+  <text x="835" y="208" class="rot-s" text-anchor="middle">TARJETAS</text>
+  <text x="835" y="220" class="rot-s" text-anchor="middle">ESCLUSA Y BÓVEDA 12 V</text>
+
+  <line x1="494" y1="270" x2="770" y2="270" class="eje"/>
+  <rect x="770" y="252" width="130" height="38" class="caja"/>
+  <text x="835" y="268" class="rot-s" text-anchor="middle">GRABADOR MVR</text>
+  <text x="835" y="280" class="rot-s" text-anchor="middle">12 V · 3 A</text>
+
+  <line x1="494" y1="330" x2="520" y2="330" class="eje"/>
+  <rect x="520" y="318" width="22" height="24" class="caja-r"/>
+  <text x="531" y="312" class="rot-s" text-anchor="middle">FT-01</text>
+  <line x1="542" y1="330" x2="770" y2="330" class="eje"/>
+  <rect x="770" y="312" width="130" height="38" class="caja"/>
+  <text x="835" y="328" class="rot-s" text-anchor="middle">SOLENOIDE COFRE A</text>
+
+  <line x1="494" y1="390" x2="520" y2="390" class="eje"/>
+  <rect x="520" y="378" width="22" height="24" class="caja-r"/>
+  <text x="531" y="372" class="rot-s" text-anchor="middle">FT-02</text>
+  <line x1="542" y1="390" x2="770" y2="390" class="eje"/>
+  <rect x="770" y="372" width="130" height="38" class="caja"/>
+  <text x="835" y="388" class="rot-s" text-anchor="middle">SOLENOIDE COFRE B</text>
+
+  <line x1="494" y1="450" x2="770" y2="450" class="eje"/>
+  <rect x="770" y="432" width="130" height="38" class="caja"/>
+  <text x="835" y="448" class="rot-s" text-anchor="middle">CÁMARAS Y AUDIO</text>
+  <text x="835" y="460" class="rot-s" text-anchor="middle">6 × 0,35 A</text>
+
+  <line x1="120" y1="290" x2="120" y2="520" class="eje"/>
+  <line x1="120" y1="520" x2="900" y2="520" class="eje"/>
+  <text x="132" y="536" class="rot-s">NEGATIVO A CHASIS · 12 AWG · TERMINAL DE COMPRESIÓN</text>
+
+  <rect x="34" y="576" width="700" height="122" class="nota"/>
+  <text x="44" y="594" class="rot-b">CRITERIOS DE PROTECCIÓN</text>
+  <text x="44" y="610" class="rot-s">1. ANL de 60 A como protección general, junto al borne positivo de la batería.</text>
+  <text x="44" y="624" class="rot-s">2. Selectividad descendente: ninguna protección de ramal supera la mitad del ANL.</text>
+  <text x="44" y="638" class="rot-s">3. FT-01 y FT-02 en las cargas inductivas del cofre, junto al automático.</text>
+  <text x="44" y="652" class="rot-s">4. El regulador solo alimenta tarjetas; ningún otro consumo en su ramal.</text>
+  <text x="44" y="666" class="rot-s">5. Caída de tensión verificada al 1,5 % en el ramal más largo (CH6).</text>
+  <text x="44" y="680" class="rot-s">6. Todos los negativos a un solo punto de chasis, sin mallas en serie.</text>
+
+  <rect x="750" y="576" width="240" height="122" class="nota"/>
+  <text x="760" y="594" class="rot-b">RESUMEN DE CARGAS</text>
+  <text x="760" y="612" class="rot-s">Tarjetas 12 V .......... 1,2 A</text>
+  <text x="760" y="628" class="rot-s">Grabador ................. 3,0 A</text>
+  <text x="760" y="644" class="rot-s">Solenoides ................ 8,0 A</text>
+  <text x="760" y="660" class="rot-s">Cámaras y audio ....... 2,1 A</text>
+  <line x1="760" y1="668" x2="980" y2="668" stroke="#8a97a4" stroke-width=".7"/>
+  <text x="760" y="684" class="rot-b">TOTAL DEMANDA ........ 14,3 A</text>
+</svg>
+</div>
+
+<!-- ============ L-04 ============ -->
+<div class="hoja">
+<svg viewBox="0 0 1188 840">
+  <use href="#marco"/>
+  <text x="42" y="118" class="tit">04 · ESQUEMA DEL BANCO DE RESPALDO Y REGULADOR 24/12</text>
+  <text x="42" y="136" class="rot-s">SIN ESCALA · OR DE DIODOS DE 35 A · CARGA Y DESCARGA</text>
+  <text x="42" y="806" class="cod">L-04</text>
+
+  <rect x="60" y="200" width="150" height="90" class="caja"/>
+  <text x="135" y="232" class="rot-b" text-anchor="middle">BATERÍAS RESPALDO</text>
+  <text x="135" y="248" class="rot-s" text-anchor="middle">2 × 12 V EN SERIE</text>
+  <text x="135" y="262" class="rot-s" text-anchor="middle">BANDEJA AISLADA EN C1</text>
+  <text x="135" y="276" class="rot-s" text-anchor="middle">24 V · 18 Ah</text>
+
+  <line x1="210" y1="245" x2="270" y2="245" class="eje"/>
+
+  <g>
+    <line x1="270" y1="245" x2="270" y2="200" class="eje"/>
+    <line x1="270" y1="245" x2="270" y2="290" class="eje"/>
+    <line x1="270" y1="200" x2="330" y2="200" class="eje"/>
+    <line x1="270" y1="290" x2="330" y2="290" class="eje"/>
+    <line x1="330" y1="200" x2="330" y2="290" class="eje"/>
+    <line x1="330" y1="245" x2="390" y2="245" class="eje"/>
+  </g>
+
+  <text x="300" y="186" class="rot-s" text-anchor="middle">D1 35 A</text>
+  <text x="300" y="306" class="rot-s" text-anchor="middle">D2 35 A</text>
+  <text x="352" y="245" class="rot-s">D3 35 A</text>
+
+  <rect x="390" y="220" width="26" height="50" class="caja-r"/>
+  <text x="403" y="212" class="rot-s" text-anchor="middle">ANL 40 A</text>
+  <line x1="416" y1="245" x2="500" y2="245" class="eje"/>
+
+  <rect x="500" y="210" width="180" height="70" class="caja-g"/>
+  <text x="590" y="236" class="rot-s" text-anchor="middle">REGULADOR 24 / 12 V</text>
+  <text x="590" y="250" class="rot-s" text-anchor="middle">5 A · PROTECCIÓN TÉRMICA</text>
+  <text x="590" y="264" class="rot-s" text-anchor="middle">DISIPADOR 4 °C/W</text>
+
+  <line x1="680" y1="245" x2="780" y2="245" class="eje"/>
+  <rect x="780" y="212" width="150" height="66" class="caja"/>
+  <text x="855" y="238" class="rot-s" text-anchor="middle">TARJETAS 12 V</text>
+  <text x="855" y="252" class="rot-s" text-anchor="middle">ESCLUSA · BÓVEDA</text>
+  <text x="855" y="266" class="rot-s" text-anchor="middle">1,2 A</text>
+
+  <line x1="210" y1="245" x2="210" y2="380" class="eje"/>
+  <line x1="210" y1="380" x2="780" y2="380" class="eje"/>
+  <text x="222" y="396" class="rot-s">RETORNO COMÚN A CHASIS · 12 AWG</text>
+
+  <rect x="60" y="440" width="150" height="70" class="caja"/>
+  <text x="135" y="468" class="rot-b" text-anchor="middle">CARGADOR</text>
+  <text x="135" y="484" class="rot-s" text-anchor="middle">24 V · 5 A DESDE Q5</text>
+  <line x1="135" y1="440" x2="135" y2="410" class="eje"/>
+  <line x1="135" y1="410" x2="210" y2="410" class="eje"/>
+  <line x1="210" y1="410" x2="210" y2="380" class="eje"/>
+
+  <rect x="300" y="430" width="420" height="150" class="nota"/>
+  <text x="312" y="450" class="rot-b">FUNCIONAMIENTO</text>
+  <text x="312" y="468" class="rot-s">1. Con el vehículo en marcha, el banco se mantiene cargado por el cargador de 5 A.</text>
+  <text x="312" y="484" class="rot-s">2. Los tres diodos en OR impiden el retorno hacia la instalación del camión.</text>
+  <text x="312" y="500" class="rot-s">3. Al apagarse el vehículo, el banco asume las tarjetas y el CCTV sin transitorio.</text>
+  <text x="312" y="516" class="rot-s">4. El ANL de 40 A protege el banco ante corto en el ramal de respaldo.</text>
+  <text x="312" y="532" class="rot-s">5. Los diodos van sobre disipador, con terminales engastados y pasta térmica.</text>
+  <text x="312" y="548" class="rot-s">6. Autonomía medida a plena carga: 68 minutos con banco a 18 Ah.</text>
+  <text x="312" y="564" class="rot-s">7. Reemplazo del banco con el seccionador QS-1 abierto y bloqueado.</text>
+
+  <rect x="750" y="430" width="240" height="150" class="nota"/>
+  <text x="762" y="450" class="rot-b">DETALLE DEL OR</text>
+  <line x1="780" y1="480" x2="860" y2="480" class="eje"/>
+  <path d="M812 470 L812 490 L824 480 Z" fill="none" stroke="var(--azul)" stroke-width="1.6"/>
+  <line x1="824" y1="470" x2="824" y2="490" class="eje"/>
+  <text x="870" y="483" class="rot-s">D1</text>
+  <line x1="780" y1="520" x2="860" y2="520" class="eje"/>
+  <path d="M812 510 L812 530 L824 520 Z" fill="none" stroke="var(--azul)" stroke-width="1.6"/>
+  <line x1="824" y1="510" x2="824" y2="530" class="eje"/>
+  <text x="870" y="523" class="rot-s">D2</text>
+  <text x="762" y="552" class="rot-s">Cátodos unidos al nodo común.</text>
+  <text x="762" y="566" class="rot-s">Ánodos a cada fuente.</text>
+</svg>
+</div>
+
+<!-- ============ L-05 ============ -->
+<div class="hoja">
+<svg viewBox="0 0 1188 840">
+  <use href="#marco"/>
+  <text x="42" y="118" class="tit">05 · LAZO DE ESCLUSA · MATRIZ OR DE PÁNICOS</text>
+  <text x="42" y="136" class="rot-s">SIN ESCALA · DIODOS 1N4007 · PULL-UP 4,7 kΩ · ENTRADA ACTIVA BAJA</text>
+  <text x="42" y="806" class="cod">L-05</text>
+
+  <line x1="60" y1="180" x2="1100" y2="180" class="eje"/>
+  <text x="66" y="172" class="rot-s">+12 V REGULADOS (REG-1)</text>
+
+  <rect x="250" y="164" width="26" height="32" class="caja"/>
+  <text x="263" y="158" class="rot-s" text-anchor="middle">R1 4,7 k</text>
+  <line x1="263" y1="196" x2="263" y2="250" class="eje"/>
+  <circle cx="263" cy="250" r="3.4" class="sol"/>
+
+  <line x1="263" y1="250" x2="700" y2="250" class="eje"/>
+  <text x="480" y="242" class="rot-s" text-anchor="middle">NODO DE PÁNICOS · ACTIVO BAJO</text>
+
+  <g>
+    <line x1="330" y1="180" x2="330" y2="300" class="eje-f"/>
+    <use href="#sim-panico" transform="translate(330 320)"/>
+    <text x="330" y="344" class="rot-b" text-anchor="middle">P1</text>
+    <line x1="330" y1="336" x2="330" y2="380" class="eje-f"/>
+    <line x1="330" y1="380" x2="340" y2="380" class="eje-f"/>
+    <path d="M340 370 L340 390 L352 380 Z" fill="none" stroke="var(--azul)" stroke-width="1.5"/>
+    <line x1="352" y1="370" x2="352" y2="390" class="eje-f"/>
+    <line x1="352" y1="380" x2="420" y2="380" class="eje-f"/>
+    <line x1="420" y1="380" x2="420" y2="250" class="eje-f"/>
+  </g>
+  <g>
+    <line x1="440" y1="180" x2="440" y2="300" class="eje-f"/>
+    <use href="#sim-panico" transform="translate(440 320)"/>
+    <text x="440" y="344" class="rot-b" text-anchor="middle">P2</text>
+    <line x1="440" y1="336" x2="440" y2="400" class="eje-f"/>
+    <line x1="440" y1="400" x2="450" y2="400" class="eje-f"/>
+    <path d="M450 390 L450 410 L462 400 Z" fill="none" stroke="var(--azul)" stroke-width="1.5"/>
+    <line x1="462" y1="390" x2="462" y2="410" class="eje-f"/>
+    <line x1="462" y1="400" x2="510" y2="400" class="eje-f"/>
+    <line x1="510" y1="400" x2="510" y2="250" class="eje-f"/>
+  </g>
+  <g>
+    <line x1="550" y1="180" x2="550" y2="300" class="eje-f"/>
+    <use href="#sim-panico" transform="translate(550 320)"/>
+    <text x="550" y="344" class="rot-b" text-anchor="middle">P3</text>
+    <line x1="550" y1="336" x2="550" y2="380" class="eje-f"/>
+    <line x1="550" y1="380" x2="560" y2="380" class="eje-f"/>
+    <path d="M560 370 L560 390 L572 380 Z" fill="none" stroke="var(--azul)" stroke-width="1.5"/>
+    <line x1="572" y1="370" x2="572" y2="390" class="eje-f"/>
+    <line x1="572" y1="380" x2="620" y2="380" class="eje-f"/>
+    <line x1="620" y1="380" x2="620" y2="250" class="eje-f"/>
+  </g>
+  <g>
+    <line x1="660" y1="180" x2="660" y2="300" class="eje-f"/>
+    <use href="#sim-panico" transform="translate(660 320)"/>
+    <text x="660" y="344" class="rot-b" text-anchor="middle">P4</text>
+    <line x1="660" y1="336" x2="660" y2="400" class="eje-f"/>
+    <line x1="660" y1="400" x2="670" y2="400" class="eje-f"/>
+    <path d="M670 390 L670 410 L682 400 Z" fill="none" stroke="var(--azul)" stroke-width="1.5"/>
+    <line x1="682" y1="390" x2="682" y2="410" class="eje-f"/>
+    <line x1="682" y1="400" x2="700" y2="400" class="eje-f"/>
+    <line x1="700" y1="400" x2="700" y2="250" class="eje-f"/>
+  </g>
+
+  <text x="346" y="372" class="rot-s">D5</text>
+  <text x="456" y="392" class="rot-s">D6</text>
+  <text x="566" y="372" class="rot-s">D7</text>
+  <text x="676" y="392" class="rot-s">D8</text>
+
+  <line x1="700" y1="250" x2="820" y2="250" class="eje"/>
+  <text x="760" y="242" class="rot-s" text-anchor="middle">DI-1</text>
+
+  <rect x="820" y="200" width="230" height="300" class="caja"/>
+  <text x="935" y="226" class="rot-b" text-anchor="middle">TARJETA DE ESCLUSA</text>
+  <text x="935" y="240" class="rot-s" text-anchor="middle">MICROCONTROLADOR</text>
+  <line x1="820" y1="252" x2="1050" y2="252" class="eje-f"/>
+  <text x="835" y="272" class="rot-s">DI-1 · pánicos (activo bajo)</text>
+  <text x="835" y="294" class="rot-s">DI-2 · puerta lateral izq.</text>
+  <text x="835" y="316" class="rot-s">DI-3 · puerta lateral der.</text>
+  <text x="835" y="338" class="rot-s">DI-4 · puerta de cofre</text>
+  <text x="835" y="360" class="rot-s">DI-5 · puerta de contingencia</text>
+  <text x="835" y="382" class="rot-s">DI-6 · escotilla</text>
+  <text x="835" y="404" class="rot-s">DI-7 · Cencon activada</text>
+  <line x1="820" y1="418" x2="1050" y2="418" class="eje-f"/>
+  <text x="835" y="438" class="rot-b">VERIFICACIÓN AND DE 5 ABERTURAS</text>
+  <text x="835" y="454" class="rot-s">+ DI-7 Cencon · si falla una, no hay salida.</text>
+  <line x1="820" y1="468" x2="1050" y2="468" class="eje-f"/>
+  <text x="835" y="488" class="rot-s">DO-1 · habilitación de bóveda</text>
+
+  <rect x="34" y="540" width="520" height="150" class="nota"/>
+  <text x="44" y="558" class="rot-b">NOTAS DEL LAZO</text>
+  <text x="44" y="576" class="rot-s">1. Diodos 1N4007, cátodo común al nodo y ánodo a cada pánico.</text>
+  <text x="44" y="592" class="rot-s">2. R1 de 4,7 kΩ mantiene el nodo en alto con todos los pánicos en reposo.</text>
+  <text x="44" y="608" class="rot-s">3. La matriz se aloja en la bornera X2, con puente extraíble por pánico.</text>
+  <text x="44" y="624" class="rot-s">4. Un pánico accionado lleva DI-1 a nivel bajo sin realimentar a los otros.</text>
+  <text x="44" y="640" class="rot-s">5. Cable de alarma de 5 hilos por pánico: alimentación, señal y retorno.</text>
+  <text x="44" y="656" class="rot-s">6. Probar la matriz uno por uno y registrar en el acta de recepción.</text>
+  <text x="44" y="672" class="rot-s">7. Sin pánicos accionados, la tarjeta debe leer DI-1 en alto.</text>
+
+  <rect x="580" y="540" width="470" height="150" class="nota"/>
+  <text x="590" y="558" class="rot-b">TABLA DE VERDAD · DI-1</text>
+  <text x="590" y="580" class="rot-s">P1  P2  P3  P4   NODO   LECTURA</text>
+  <text x="590" y="598" class="rot-s">0   0   0   0    ALTO   REPOSO</text>
+  <text x="590" y="616" class="rot-s">1   0   0   0    BAJO   PÁNICO P1</text>
+  <text x="590" y="634" class="rot-s">0   1   0   0    BAJO   PÁNICO P2</text>
+  <text x="590" y="652" class="rot-s">0   0   1   1    BAJO   P3 + P4</text>
+  <text x="590" y="670" class="rot-s">1   1   1   1    BAJO   LOS CUATRO</text>
+</svg>
+</div>
+
+<!-- ============ L-06 ============ -->
+<div class="hoja">
+<svg viewBox="0 0 1188 840">
+  <use href="#marco"/>
+  <text x="42" y="118" class="tit">06 · CIRCUITO DE COFRE · DOBLE SOLENOIDE Y CENCON</text>
+  <text x="42" y="136" class="rot-s">SIN ESCALA · DIODOS 6A10 DE AISLAMIENTO · CÁTODOS AL PIN AUXILIAR</text>
+  <text x="42" y="806" class="cod">L-06</text>
+
+  <line x1="60" y1="180" x2="1100" y2="180" class="eje"/>
+  <text x="66" y="172" class="rot-s">+24 V DESDE Q2 · FT-01</text>
+
+  <rect x="120" y="164" width="26" height="32" class="caja-r"/>
+  <text x="133" y="158" class="rot-s" text-anchor="middle">FT-01</text>
+  <line x1="133" y1="196" x2="133" y2="250" class="eje"/>
+  <line x1="133" y1="250" x2="200" y2="250" class="eje"/>
+
+  <text x="150" y="242" class="rot-s">24 V MANDO</text>
+
+  <rect x="200" y="200" width="240" height="300" class="caja"/>
+  <text x="320" y="226" class="rot-b" text-anchor="middle">BLOQUE DE MANDO DEL COFRE</text>
+  <line x1="200" y1="238" x2="440" y2="238" class="eje-f"/>
+
+  <text x="212" y="258" class="rot-s">CAMINO A · PULSADOR INTERNO C2</text>
+  <use href="#sim-puls" transform="translate(232 288)"/>
+  <text x="248" y="291" class="rot-s">S1</text>
+  <line x1="232" y1="250" x2="232" y2="281" class="eje-f"/>
+
+  <text x="212" y="336" class="rot-s">CAMINO B · CENCON SC-01 / SC-02</text>
+  <rect x="212" y="352" width="70" height="34" class="caja-g"/>
+  <text x="247" y="374" class="rot-s" text-anchor="middle">CENCON</text>
+  <line x1="282" y1="369" x2="330" y2="369" class="eje-f"/>
+
+  <line x1="232" y1="295" x2="232" y2="330" class="eje-f"/>
+  <line x1="232" y1="330" x2="360" y2="330" class="eje-f"/>
+  <line x1="360" y1="330" x2="360" y2="290" class="eje-f"/>
+  <line x1="330" y1="369" x2="360" y2="369" class="eje-f"/>
+  <line x1="360" y1="369" x2="360" y2="330" class="eje-f"/>
+
+  <line x1="360" y1="290" x2="400" y2="290" class="eje-f"/>
+  <path d="M400 280 L400 300 L412 290 Z" fill="none" stroke="var(--azul)" stroke-width="1.5"/>
+  <line x1="412" y1="280" x2="412" y2="300" class="eje-f"/>
+  <text x="404" y="276" class="rot-s">D9 6A10</text>
+
+  <line x1="360" y1="330" x2="360" y2="400" class="eje-f"/>
+  <line x1="360" y1="400" x2="400" y2="400" class="eje-f"/>
+  <path d="M400 390 L400 410 L412 400 Z" fill="none" stroke="var(--azul)" stroke-width="1.5"/>
+  <line x1="412" y1="390" x2="412" y2="410" class="eje-f"/>
+  <text x="404" y="386" class="rot-s">D10 6A10</text>
+
+  <line x1="412" y1="290" x2="440" y2="290" class="eje-f"/>
+  <line x1="412" y1="400" x2="440" y2="400" class="eje-f"/>
+  <text x="424" y="286" class="rot-s">PIN AUX</text>
+  <text x="424" y="396" class="rot-s">PIN AUX</text>
+
+  <line x1="440" y1="290" x2="560" y2="290" class="eje"/>
+  <line x1="440" y1="400" x2="560" y2="400" class="eje"/>
+
+  <rect x="560" y="262" width="120" height="56" class="caja"/>
+  <text x="620" y="286" class="rot-b" text-anchor="middle">SOL-A</text>
+  <text x="620" y="300" class="rot-s" text-anchor="middle">SOLENOIDE 1</text>
+  <rect x="560" y="372" width="120" height="56" class="caja"/>
+  <text x="620" y="396" class="rot-b" text-anchor="middle">SOL-B</text>
+  <text x="620" y="410" class="rot-s" text-anchor="middle">SOLENOIDE 2</text>
+
+  <line x1="680" y1="290" x2="760" y2="290" class="eje"/>
+  <line x1="680" y1="400" x2="760" y2="400" class="eje"/>
+  <line x1="760" y1="290" x2="760" y2="400" class="eje"/>
+  <line x1="760" y1="345" x2="820" y2="345" class="eje"/>
+  <text x="790" y="337" class="rot-s" text-anchor="middle">CHASIS</text>
+
+  <rect x="820" y="300" width="230" height="90" class="caja"/>
+  <text x="935" y="324" class="rot-b" text-anchor="middle">PASADOR CON SOLENOIDE</text>
+  <text x="935" y="340" class="rot-s" text-anchor="middle">BLOQUEA EL VARILLAJE DEL COFRE</text>
+  <text x="935" y="356" class="rot-s" text-anchor="middle">RETENCIÓN MECÁNICA 300 N</text>
+  <text x="935" y="372" class="rot-s" text-anchor="middle">CARRERA 18 mm</text>
+
+  <rect x="34" y="540" width="540" height="150" class="nota"/>
+  <text x="44" y="558" class="rot-b">NOTAS DEL CIRCUITO DE COFRE</text>
+  <text x="44" y="576" class="rot-s">1. Dos caminos de mando independientes, uno por solenoide, con D9 y D10 de 6A10.</text>
+  <text x="44" y="592" class="rot-s">2. Cátodos al pin auxiliar de la tarjeta: evita que un camino realimente al otro.</text>
+  <text x="44" y="608" class="rot-s">3. El cofre solo libera con la secuencia de esclusa cumplida y la Cencon activada.</text>
+  <text x="44" y="624" class="rot-s">4. FT-01 protege el ramal de 10 A; Q2 es el automático de cabecera.</text>
+  <text x="44" y="640" class="rot-s">5. Los solenoides se montan sobre base aislada, con retorno directo a chasis.</text>
+  <text x="44" y="656" class="rot-s">6. Puerta de cofre al centro del mamparo, con 60 mm de holgura a las sillas.</text>
+  <text x="44" y="672" class="rot-s">7. Verificar carrera del pasador contra el varillaje antes de cerrar el tapizado.</text>
+
+  <rect x="600" y="540" width="450" height="150" class="nota"/>
+  <text x="610" y="558" class="rot-b">SECUENCIA DE LIBERACIÓN</text>
+  <text x="610" y="578" class="rot-s">1. Las cinco aberturas cerradas.</text>
+  <text x="610" y="596" class="rot-s">2. Cencon activada y validada por la tarjeta.</text>
+  <text x="610" y="614" class="rot-s">3. Relé K0 cierra como candado de la lógica.</text>
+  <text x="610" y="632" class="rot-s">4. Autorización por pulsador S1 o por Cencon.</text>
+  <text x="610" y="650" class="rot-s">5. Solenoide retira el pasador del varillaje.</text>
+  <text x="610" y="668" class="rot-s">6. Si una abertura se abre, la tarjeta corta la salida.</text>
+</svg>
+</div>
+
+<!-- ============ L-07 ============ -->
+<div class="hoja">
+<svg viewBox="0 0 1188 840">
+  <use href="#marco"/>
+  <text x="42" y="118" class="tit">07 · CCTV Y AUDIO · SEIS CANALES Y DOS MONITORES</text>
+  <text x="42" y="136" class="rot-s">SIN ESCALA · UTP CAT 6 DIRECTO AL MVR · AUDIO EN PAR LIBRE</text>
+  <text x="42" y="806" class="cod">L-07</text>
+
+  <rect x="440" y="230" width="300" height="300" class="caja"/>
+  <text x="590" y="256" class="rot-b" text-anchor="middle">GRABADOR MVR · C1</text>
+  <text x="590" y="272" class="rot-s" text-anchor="middle">6 CANALES DE VIDEO · 2 DE AUDIO</text>
+  <line x1="440" y1="284" x2="740" y2="284" class="eje-f"/>
+  <text x="454" y="304" class="rot-s">CH1 · CAM-01 FRONTAL</text>
+  <text x="454" y="324" class="rot-s">CH2 · CAM-02 POSTERIOR</text>
+  <text x="454" y="344" class="rot-s">CH3 · CAM-03 COPILOTO + MIC-01</text>
+  <text x="454" y="364" class="rot-s">CH4 · CAM-04 CONDUCTOR</text>
+  <text x="454" y="384" class="rot-s">CH5 · CAM-05 TRIPULACIÓN</text>
+  <text x="454" y="404" class="rot-s">CH6 · CAM-06 COFRE</text>
+  <text x="454" y="424" class="rot-s">AUD-1 · MIC-01</text>
+  <text x="454" y="444" class="rot-s">AUD-2 · MIC-02</text>
+  <line x1="440" y1="460" x2="740" y2="460" class="eje-f"/>
+  <text x="454" y="480" class="rot-s">UTP CAT 6 · 8P8C · SIN BALUNES</text>
+  <text x="454" y="496" class="rot-s">SIN HDMI · SALIDA DE PANTALLAS POR UTP</text>
+  <text x="454" y="516" class="rot-s">DISCO 1 TB · GRABACIÓN CONTINUA 30 DÍAS</text>
+
+  <g class="eje-f">
+    <line x1="440" y1="300" x2="200" y2="300"/>
+    <line x1="440" y1="320" x2="200" y2="320"/>
+    <line x1="440" y1="340" x2="200" y2="340"/>
+    <line x1="440" y1="360" x2="200" y2="360"/>
+    <line x1="440" y1="380" x2="200" y2="380"/>
+    <line x1="440" y1="400" x2="200" y2="400"/>
+  </g>
+  <g class="rot-s">
+    <text x="196" y="303" text-anchor="end">CAM-01 CH1</text>
+    <text x="196" y="323" text-anchor="end">CAM-02 CH2</text>
+    <text x="196" y="343" text-anchor="end">CAM-03 CH3 + MIC-01</text>
+    <text x="196" y="363" text-anchor="end">CAM-04 CH4</text>
+    <text x="196" y="383" text-anchor="end">CAM-05 CH5</text>
+    <text x="196" y="403" text-anchor="end">CAM-06 CH6</text>
+  </g>
+
+  <line x1="740" y1="330" x2="860" y2="330" class="eje"/>
+  <rect x="860" y="300" width="120" height="60" class="caja-g"/>
+  <text x="920" y="326" class="rot-s" text-anchor="middle">MON-01</text>
+  <text x="920" y="340" class="rot-s" text-anchor="middle">7" CONDUCTOR</text>
+
+  <line x1="740" y1="390" x2="800" y2="390" class="eje"/>
+  <line x1="800" y1="390" x2="800" y2="430" class="eje"/>
+  <line x1="800" y1="430" x2="860" y2="430" class="eje"/>
+  <rect x="860" y="400" width="120" height="60" class="caja-g"/>
+  <text x="920" y="426" class="rot-s" text-anchor="middle">MON-02</text>
+  <text x="920" y="440" class="rot-s" text-anchor="middle">10" TRIPULACIÓN</text>
+
+  <rect x="860" y="180" width="240" height="90" class="caja-r"/>
+  <text x="980" y="204" class="rot-b" text-anchor="middle">UN ÚNICO CABLE UTP</text>
+  <text x="980" y="222" class="rot-s" text-anchor="middle">Las dos pantallas tendrán conexión</text>
+  <text x="980" y="236" class="rot-s" text-anchor="middle">al MVR por un único cable UTP</text>
+  <text x="980" y="252" class="rot-s" text-anchor="middle">desde la salida de pantallas.</text>
+
+  <circle cx="240" cy="340" r="5" class="sol"/>
+  <text x="240" y="332" class="rot-s" text-anchor="middle">MIC-01</text>
+  <circle cx="880" cy="390" r="5" class="sol"/>
+  <text x="880" y="382" class="rot-s" text-anchor="middle">MIC-02</text>
+
+  <rect x="34" y="560" width="540" height="130" class="nota"/>
+  <text x="44" y="578" class="rot-b">NOTAS DE CCTV Y AUDIO</text>
+  <text x="44" y="596" class="rot-s">1. Un UTP Cat 6 por cámara, directo al grabador, sin empalmes ni balunes.</text>
+  <text x="44" y="612" class="rot-s">2. MIC-01 junto a CAM-03; MIC-02 junto a MON-02.</text>
+  <text x="44" y="628" class="rot-s">3. Audio por el par libre del mismo UTP de la cámara asociada.</text>
+  <text x="44" y="644" class="rot-s">4. Grabador sobre base antivibratoria en C1, con 60 mm de aireación.</text>
+  <text x="44" y="660" class="rot-s">5. Cámaras con visión nocturna y lente de 3,6 mm; CH6 en la esquina inferior derecha.</text>
+  <text x="44" y="676" class="rot-s">6. Reloj del grabador sincronizado con el rastreador al momento de la entrega.</text>
+
+  <rect x="600" y="560" width="450" height="130" class="nota"/>
+  <text x="610" y="578" class="rot-b">RESOLUCIÓN Y ALMACENAMIENTO</text>
+  <text x="610" y="598" class="rot-s">Video: 1 080 p · 15 ips por canal · H.265</text>
+  <text x="610" y="616" class="rot-s">Audio: G.711 · 8 kHz</text>
+  <text x="610" y="634" class="rot-s">Disco: 1 TB, sobre-escritura automática</text>
+  <text x="610" y="652" class="rot-s">Retención calculada: 30 días a 6 canales</text>
+  <text x="610" y="670" class="rot-s">Consumo total CCTV y audio: 2,1 A a 12 V</text>
+</svg>
+</div>
+
+<!-- ============ L-08 ============ -->
+<div class="hoja">
+<svg viewBox="0 0 1188 840">
+  <use href="#marco"/>
+  <text x="42" y="118" class="tit">08 · TABLERO DE CONTROL C2 · PULSADORES Y LED</text>
+  <text x="42" y="136" class="rot-s">ESCALA 1:5 · VISTA FRONTAL DE LA PLACA · SOLO PULSADORES Y LED</text>
+  <text x="42" y="806" class="cod">L-08</text>
+
+  <rect x="290" y="200" width="480" height="380" class="caja"/>
+  <rect x="304" y="214" width="452" height="352" fill="#fbfcfd" stroke="#8a97a4" stroke-width="1"/>
+
+  <text x="530" y="188" class="rot-b" text-anchor="middle">PLACA ACRÍLICO 6 mm · C2</text>
+
+  <g>
+    <use href="#sim-puls" transform="translate(390 280)"/>
+    <text x="390" y="308" class="rot-s" text-anchor="middle">S1 · COFRE</text>
+    <use href="#sim-led" transform="translate(390 340)"/>
+    <text x="390" y="362" class="rot-s" text-anchor="middle">H1 CERRADO</text>
+
+    <use href="#sim-puls" transform="translate(530 280)"/>
+    <text x="530" y="308" class="rot-s" text-anchor="middle">S2 · BÓVEDA</text>
+    <use href="#sim-led" transform="translate(530 340)"/>
+    <text x="530" y="362" class="rot-s" text-anchor="middle">H2 ABIERTO</text>
+
+    <use href="#sim-puls" transform="translate(670 280)"/>
+    <text x="670" y="308" class="rot-s" text-anchor="middle">S3 · RESET</text>
+    <use href="#sim-led" transform="translate(670 340)"/>
+    <text x="670" y="362" class="rot-s" text-anchor="middle">H3 HABILITADO</text>
+
+    <use href="#sim-puls" transform="translate(460 430)"/>
+    <text x="460" y="458" class="rot-s" text-anchor="middle">S4 · LÁMPARA</text>
+    <use href="#sim-led" transform="translate(460 490)"/>
+    <text x="460" y="512" class="rot-s" text-anchor="middle">H4 FALLA</text>
+
+    <use href="#sim-puls" transform="translate(600 430)"/>
+    <text x="600" y="458" class="rot-s" text-anchor="middle">S5 · PÁNICO</text>
+    <use href="#sim-led" transform="translate(600 490)"/>
+    <text x="600" y="512" class="rot-s" text-anchor="middle">H5 RESPALDO</text>
+  </g>
+
+  <rect x="34" y="600" width="540" height="96" class="nota"/>
+  <text x="44" y="618" class="rot-b">NOTAS DE C2</text>
+  <text x="44" y="636" class="rot-s">1. En C2 solo van pulsadores y LED; las baterías y el resto de equipos van en C1.</text>
+  <text x="44" y="652" class="rot-s">2. Los cinco LED llevan ánodo al positivo y cátodo por resistencia de 1 kΩ a la tarjeta.</text>
+  <text x="44" y="668" class="rot-s">3. Pulsadores de 16 mm, contacto NA, con capuchón y rotulado grabado.</text>
+  <text x="44" y="684" class="rot-s">4. Placa acrílica de 6 mm sobre separadores de 15 mm; tornillería M3.</text>
+
+  <rect x="600" y="600" width="450" height="96" class="nota"/>
+  <text x="610" y="618" class="rot-b">CODIFICACIÓN DE LED</text>
+  <text x="610" y="638" class="rot-s">H1 verde · cerrado y con secuencia completa</text>
+  <text x="610" y="654" class="rot-s">H2 ámbar · alguna abertura abierta</text>
+  <text x="610" y="670" class="rot-s">H3 azul · bóveda y cofre habilitados</text>
+  <text x="610" y="686" class="rot-s">H4 rojo · falla de tarjeta o de Cencon · H5 blanco · respaldo activo</text>
+</svg>
+</div>
+
+<!-- ============ L-09 ============ -->
+<div class="hoja">
+<svg viewBox="0 0 1188 840">
+  <use href="#marco"/>
+  <text x="42" y="118" class="tit">09 · DETALLE DE CAJAS C1 Y C2 Y PASOS DE MURO</text>
+  <text x="42" y="136" class="rot-s">ESCALA 1:10 · MONTAJE SOBRE ACRÍLICO Y SEPARADORES</text>
+  <text x="42" y="806" class="cod">L-09</text>
+
+  <text x="250" y="200" class="rot-b" text-anchor="middle">CORTE VERTICAL · CAJA C1</text>
+  <rect x="150" y="230" width="200" height="300" class="caja"/>
+  <rect x="162" y="242" width="176" height="276" fill="#fbfcfd" stroke="#8a97a4" stroke-width="1"/>
+  <line x1="162" y1="242" x2="338" y2="242" stroke="#12181f" stroke-width="5"/>
+  <line x1="162" y1="518" x2="338" y2="518" stroke="#12181f" stroke-width="5"/>
+  <rect x="176" y="262" width="148" height="8" fill="#c9d3dd" stroke="#12181f" stroke-width=".8"/>
+  <text x="250" y="286" class="rot-s" text-anchor="middle">PLACA ACRÍLICO 6 mm</text>
+  <g>
+    <rect x="176" y="296" width="8" height="14" fill="#8a97a4"/>
+    <rect x="316" y="296" width="8" height="14" fill="#8a97a4"/>
+    <rect x="176" y="440" width="8" height="14" fill="#8a97a4"/>
+    <rect x="316" y="440" width="8" height="14" fill="#8a97a4"/>
+  </g>
+  <text x="250" y="322" class="rot-s" text-anchor="middle">SEPARADORES 15 mm · M3</text>
+  <rect x="196" y="352" width="108" height="60" class="caja-g"/>
+  <text x="250" y="386" class="rot-s" text-anchor="middle">EQUIPOS EMPOTRADOS</text>
+  <text x="250" y="400" class="rot-s" text-anchor="middle">O AISLADOS</text>
+  <line x1="304" y1="470" x2="336" y2="470" class="eje"/>
+  <text x="310" y="464" class="rot-s">12 AWG</text>
+  <text x="310" y="490" class="rot-s">TIERRA</text>
+  <circle cx="336" cy="470" r="4" fill="#fff" stroke="#12181f" stroke-width="1.4"/>
+
+  <text x="620" y="200" class="rot-b" text-anchor="middle">PASO DE MURO H-1</text>
+  <rect x="520" y="230" width="200" height="300" class="caja"/>
+  <rect x="530" y="240" width="180" height="280" fill="#fbfcfd" stroke="#8a97a4" stroke-width="1"/>
+  <line x1="560" y1="240" x2="560" y2="520" stroke="#12181f" stroke-width="5"/>
+  <line x1="680" y1="240" x2="680" y2="520" stroke="#12181f" stroke-width="5"/>
+  <rect x="548" y="360" width="24" height="30" fill="#3b4650"/>
+  <rect x="668" y="360" width="24" height="30" fill="#3b4650"/>
+  <line x1="530" y1="375" x2="710" y2="375" class="eje"/>
+  <text x="620" y="352" class="rot-s" text-anchor="middle">PRENSAESTOPAS PG7</text>
+  <text x="620" y="408" class="rot-s" text-anchor="middle">SELLANTE POLIURETANO</text>
+  <text x="620" y="424" class="rot-s" text-anchor="middle">EN CARA INTERIOR Y EXTERIOR</text>
+  <text x="620" y="470" class="rot-s" text-anchor="middle">CABLE DE ALARMA 5 HILOS</text>
+
+  <text x="960" y="200" class="rot-b" text-anchor="middle">C2 · VISTA DE PERFIL</text>
+  <rect x="880" y="230" width="160" height="200" class="caja"/>
+  <rect x="890" y="240" width="140" height="180" fill="#fbfcfd" stroke="#8a97a4" stroke-width="1"/>
+  <rect x="902" y="256" width="116" height="6" fill="#c9d3dd" stroke="#12181f" stroke-width=".7"/>
+  <rect x="902" y="272" width="6" height="12" fill="#8a97a4"/>
+  <rect x="1006" y="272" width="6" height="12" fill="#8a97a4"/>
+  <circle cx="930" cy="330" r="6" fill="#fff" stroke="#12181f" stroke-width="1.3"/>
+  <circle cx="980" cy="330" r="6" fill="#fff" stroke="#12181f" stroke-width="1.3"/>
+  <text x="960" y="366" class="rot-s" text-anchor="middle">SOLO PULSADORES Y LED</text>
+  <text x="960" y="382" class="rot-s" text-anchor="middle">PROFUNDIDAD ÚTIL 45 mm</text>
+
+  <rect x="34" y="560" width="1116" height="130" class="nota"/>
+  <text x="44" y="578" class="rot-b">ESPECIFICACIÓN DE CAJAS Y PASOS</text>
+  <text x="44" y="596" class="rot-s">1. C1 aloja baterías de respaldo en bandeja aislada, diodos de 35 A, regulador 24/12, grabador y rastreador.</text>
+  <text x="44" y="612" class="rot-s">2. C2 aloja únicamente pulsadores y LED, con placa acrílica de 6 mm sobre separadores de 15 mm.</text>
+  <text x="44" y="628" class="rot-s">3. Todos los equipos de C1 van empotrados en acrílico o aislados, para evitar contacto con voltaje a tierra.</text>
+  <text x="44" y="644" class="rot-s">4. Perforaciones H-1 en el mamparo y H-2 en el piso, con PG7 y sellante PU en ambas caras.</text>
+  <text x="44" y="660" class="rot-s">5. Cajas y tapas aterrizadas al chasis con conductor de 12 AWG y terminal de compresión.</text>
+  <text x="44" y="676" class="rot-s">6. Tornillería M3 con arandela de presión; nada de sujeción por gravedad ni cinta adhesiva.</text>
+</svg>
+</div>
+
+<!-- ============ L-10 ============ -->
+<div class="hoja">
+<svg viewBox="0 0 1188 840">
+  <use href="#marco"/>
+  <text x="42" y="118" class="tit">10 · CUADRO DE CARGAS Y LISTA DE MATERIALES</text>
+  <text x="42" y="136" class="rot-s">SIN ESCALA · CUADRO DE CARGAS POR CIRCUITO</text>
+  <text x="42" y="806" class="cod">L-10</text>
+
+  <rect x="34" y="170" width="1116" height="24" class="band"/>
+  <text x="44" y="186" class="rot-bla">CIRCUITO</text>
+  <text x="200" y="186" class="rot-bla">DESTINO</text>
+  <text x="520" y="186" class="rot-bla">PROTECCIÓN</text>
+  <text x="700" y="186" class="rot-bla">CONDUCTOR</text>
+  <text x="860" y="186" class="rot-bla">CARGA (A)</text>
+  <text x="1000" y="186" class="rot-bla">CAÍDA (%)</text>
+
+  <g class="rot-s">
+    <rect x="34" y="194" width="1116" height="26" fill="#f7f9fb" stroke="#c9d3dd" stroke-width=".7"/>
+    <text x="44" y="211">Q0</text><text x="200" y="211">Regulador 24/12 y tarjetas</text><text x="520" y="211">Q0 3 A</text><text x="700" y="211">16 AWG</text><text x="860" y="211">1,2</text><text x="1000" y="211">0,6</text>
+
+    <rect x="34" y="220" width="1116" height="26" fill="#fff" stroke="#c9d3dd" stroke-width=".7"/>
+    <text x="44" y="237">Q1</text><text x="200" y="237">Grabador MVR</text><text x="520" y="237">Q1 3 A</text><text x="700" y="237">16 AWG</text><text x="860" y="237">3,0</text><text x="1000" y="237">0,8</text>
+
+    <rect x="34" y="246" width="1116" height="26" fill="#f7f9fb" stroke="#c9d3dd" stroke-width=".7"/>
+    <text x="44" y="263">Q2</text><text x="200" y="263">Solenoides del cofre A y B</text><text x="520" y="263">Q2 10 A · FT-01</text><text x="700" y="263">16 AWG</text><text x="860" y="263">8,0</text><text x="1000" y="263">1,2</text>
+
+    <rect x="34" y="272" width="1116" height="26" fill="#fff" stroke="#c9d3dd" stroke-width=".7"/>
+    <text x="44" y="289">Q3</text><text x="200" y="289">Cámaras CH1 a CH6 y audio</text><text x="520" y="289">Q3 10 A</text><text x="700" y="289">18 AWG</text><text x="860" y="289">2,1</text><text x="1000" y="289">1,4</text>
+
+    <rect x="34" y="298" width="1116" height="26" fill="#f7f9fb" stroke="#c9d3dd" stroke-width=".7"/>
+    <text x="44" y="315">Q4</text><text x="200" y="315">Monitores MON-01 y MON-02</text><text x="520" y="315">Q4 5 A</text><text x="700" y="315">18 AWG</text><text x="860" y="315">1,4</text><text x="1000" y="315">0,9</text>
+
+    <rect x="34" y="324" width="1116" height="26" fill="#fff" stroke="#c9d3dd" stroke-width=".7"/>
+    <text x="44" y="341">Q5</text><text x="200" y="341">Cargador del banco de respaldo</text><text x="520" y="341">Q5 5 A</text><text x="700" y="341">16 AWG</text><text x="860" y="341">5,0</text><text x="1000" y="341">0,7</text>
+
+    <rect x="34" y="350" width="1116" height="26" fill="#f7f9fb" stroke="#c9d3dd" stroke-width=".7"/>
+    <text x="44" y="367">Q6</text><text x="200" y="367">Rastreador GPS+GSM</text><text x="520" y="367">Q6 2 A</text><text x="700" y="367">20 AWG</text><text x="860" y="367">0,4</text><text x="1000" y="367">0,4</text>
+
+    <rect x="34" y="376" width="1116" height="26" fill="#fff" stroke="#c9d3dd" stroke-width=".7"/>
+    <text x="44" y="393">Q7</text><text x="200" y="393">Tarjeta de bóveda (independiente)</text><text x="520" y="393">Q7 3 A · FT-03</text><text x="700" y="393">16 AWG</text><text x="860" y="393">0,8</text><text x="1000" y="393">0,5</text>
+
+    <rect x="34" y="402" width="1116" height="26" fill="#f7f9fb" stroke="#c9d3dd" stroke-width=".7"/>
+    <text x="44" y="419">Q8</text><text x="200" y="419">Cerradura Cencon SC-01 / SC-02</text><text x="520" y="419">Q8 3 A · FT-04</text><text x="700" y="419">18 AWG</text><text x="860" y="419">1,0</text><text x="1000" y="419">0,6</text>
+
+    <rect x="34" y="428" width="1116" height="26" fill="#fff" stroke="#c9d3dd" stroke-width=".7"/>
+    <text x="44" y="445">Q9</text><text x="200" y="445">Iluminación interior del furgón</text><text x="520" y="445">Q9 5 A</text><text x="700" y="445">18 AWG</text><text x="860" y="445">2,6</text><text x="1000" y="445">1,0</text>
+
+    <rect x="34" y="454" width="1116" height="26" fill="#f7f9fb" stroke="#c9d3dd" stroke-width=".7"/>
+    <text x="44" y="471">Q10</text><text x="200" y="471">Señalización y sirena</text><text x="520" y="471">Q10 3 A · FT-05</text><text x="700" y="471">18 AWG</text><text x="860" y="471">1,2</text><text x="1000" y="471">0,8</text>
+
+    <rect x="34" y="480" width="1116" height="26" fill="#fff" stroke="#c9d3dd" stroke-width=".7"/>
+    <text x="44" y="497">Q11</text><text x="200" y="497">Reserva para ampliación</text><text x="520" y="497">Q11 5 A</text><text x="700" y="497">18 AWG</text><text x="860" y="497">—</text><text x="1000" y="497">—</text>
+  </g>
+
+  <rect x="34" y="512" width="1116" height="24" class="band-l" stroke="#12181f" stroke-width="1"/>
+  <text x="44" y="528" class="rot-b">TOTAL DEMANDA SIMULTÁNEA 14,3 A · PRINCIPAL 12 AWG · ANL 60 A · CAÍDA MÁXIMA 1,4 %</text>
+
+  <rect x="34" y="552" width="1116" height="146" class="nota"/>
+  <text x="44" y="570" class="rot-b">LISTA DE MATERIALES</text>
+  <text x="44" y="588" class="rot-s">01 · Cable Centelsa THHN/MTW 12 AWG (principal) ............ 18 m</text>
+  <text x="44" y="604" class="rot-s">02 · Cable Centelsa THHN/MTW 16 AWG y 18 AWG (ramales) .... 95 m</text>
+  <text x="44" y="620" class="rot-s">03 · Cable de alarma de 5 hilos (aberturas) ................ 60 m</text>
+  <text x="44" y="636" class="rot-s">04 · UTP Cat 6 (CCTV y pantallas) .......................... 90 m</text>
+  <text x="44" y="652" class="rot-s">05 · Diodos 1N4007 (matriz OR) ............................. 12 u</text>
+  <text x="44" y="668" class="rot-s">06 · Diodos 6A10 (aislamiento de mando) .................... 6 u</text>
+  <text x="44" y="684" class="rot-s">07 · Diodos de bloqueo 35 A con disipador .................. 3 u</text>
+
+  <text x="600" y="570" class="rot-b">CONTINÚA</text>
+  <text x="600" y="588" class="rot-s">08 · Regulador 24/12 V 5 A con disipador .................. 1 u</text>
+  <text x="600" y="604" class="rot-s">09 · Fusibles ANL 60 A y 40 A con base ..................... 2 u</text>
+  <text x="600" y="620" class="rot-s">10 · Automáticos Q0 a Q11 · fusibles FT-01 a FT-05 ......... 17 u</text>
+  <text x="600" y="636" class="rot-s">11 · Bornera de paso X2 con barra de puenteo ............... 1 u</text>
+  <text x="600" y="652" class="rot-s">12 · Prensaestopas PG7 y sellante PU ...................... 8 u</text>
+  <text x="600" y="668" class="rot-s">13 · Placa acrílica 6 mm y separadores de 15 mm ........... 2 jg</text>
+  <text x="600" y="684" class="rot-s">14 · Cámaras 1 080 p · micrófonos · monitores 7" y 10" .... 6+2+2</text>
+
+  <rect x="940" y="588" width="200" height="100" class="caja-r"/>
+  <text x="950" y="608" class="rot-b">TOLERANCIA DE OBRA</text>
+  <text x="950" y="626" class="rot-s">Cotas de altura a verificar</text>
+  <text x="950" y="640" class="rot-s">con el vehículo nivelado</text>
+  <text x="950" y="654" class="rot-s">y sin carga.</text>
+  <text x="950" y="672" class="rot-s">Holgura de 60 mm entre la</text>
+  <text x="950" y="684" class="rot-s">hoja del cofre y las sillas.</text>
+</svg>
+</div>
+
+<script>
+function descargar(nombre, texto, tipo){
+  const b = new Blob([texto], {type: tipo});
+  const u = URL.createObjectURL(b);
+  const a = document.createElement('a');
+  a.href = u; a.download = nombre; a.click();
+  setTimeout(()=>URL.revokeObjectURL(u), 4000);
+}
+
+function bajarSVG(){
+  const hojas = [...document.querySelectorAll('.hoja svg')];
+  let cuerpo = '';
+  hojas.forEach((s,i)=>{
+    const c = s.cloneNode(true);
+    c.removeAttribute('viewBox');
+    cuerpo += '<g transform="translate(0 '+(i*880)+')">'+c.innerHTML+'</g>';
+  });
+  const total = hojas.length*880;
+  const salida = '<?xml version="1.0" encoding="UTF-8"?>\n' +
+    '<svg xmlns="http://www.w3.org/2000/svg" width="1188" height="'+total+'" viewBox="0 0 1188 '+total+'">' +
+    '<style>.lam text,text{font-family:"Courier New",monospace}.tit{font-family:Arial;font-size:17px;font-weight:700;fill:#0b3a6f}' +
+    '.cod{font-family:Arial;font-size:26px;font-weight:700;fill:#0b3a6f}.tb{font-size:11.5px;font-weight:700;fill:#fff}' +
+    '.tbs{font-size:9px;fill:#ffffffcc}.rot{font-size:9px;fill:#12181f}.rot-b{font-size:9.5px;font-weight:700;fill:#0b3a6f}' +
+    '.rot-s{font-size:7.6px;fill:#3b4650}.rot-bla{font-size:9px;fill:#fff}.cota{stroke:#b5342b;stroke-width:.85;fill:none}' +
+    '.cota-t{font-size:9.5px;fill:#b5342b}.marco{fill:none;stroke:#12181f;stroke-width:2.2}' +
+    '.marco-f{fill:none;stroke:#12181f;stroke-width:.85}.eje{fill:none;stroke:#0b3a6f;stroke-width:2.1}' +
+    '.eje-f{fill:none;stroke:#0b3a6f;stroke-width:1}.eje-d{fill:none;stroke:#0b3a6f;stroke-width:1;stroke-dasharray:5 3}' +
+    '.eje-p{fill:none;stroke:#8a97a4;stroke-width:1;stroke-dasharray:2 3}.caja{fill:#fff;stroke:#0b3a6f;stroke-width:1.5}' +
+    '.caja-g{fill:#eef2f6;stroke:#0b3a6f;stroke-width:1.2}.caja-r{fill:#fdf3f2;stroke:#b5342b;stroke-width:1.2}' +
+    '.sol{fill:#0b3a6f}.nota{fill:#f7f9fb;stroke:#8a97a4;stroke-width:.7}.band{fill:#0b3a6f}.band-l{fill:#e8eef4}</style>' +
+    '<rect width="1188" height="'+total+'" fill="#fff"/>' + cuerpo + '</svg>';
+  descargar('planos_NPR_Transbank.svg', salida, 'image/svg+xml');
+}
+
+function bajarDXF(){
+  const H = (n)=>'0\n'+n+'\n';
+  const ent = [];
+  ent.push(H('SECTION')+H('HEADER')+H('ENDSEC'));
+  let tablas = H('SECTION')+H('TABLES')+H('TABLE')+H('LAYER')+'70\n5\n';
+  ['0','MARCO','DIBUJO','TEXTO','COTAS'].forEach(c=>{
+    tablas += H('LAYER')+H('2')+c+'70\n0\n62\n'+(c==='COTAS'?1:5)+'\n6\nCONTINUOUS\n';
+  });
+  tablas += H('ENDTAB')+H('ENDSEC');
+  ent.push(tablas);
+
+  const bloques = [];
+  document.querySelectorAll('.hoja svg').forEach((svg,idx)=>{
+    const nom = 'L-'+String(idx+1).padStart(2,'0');
+    const cuerpo = [];
+    const flip = y => (840 - y);
+    svg.querySelectorAll('line,rect,circle,text,polyline,path').forEach(el=>{
+      const t = el.tagName.toLowerCase();
+      const capa = (t==='text') ? 'TEXTO' : 'DIBUJO';
+      if(t==='line'){
+        const x1=+el.getAttribute('x1'),y1=+el.getAttribute('y1'),x2=+el.getAttribute('x2'),y2=+el.getAttribute('y2');
+        if([x1,y1,x2,y2].some(isNaN)) return;
+        cuerpo.push(H('LINE')+H('8')+capa+H('10')+x1+H('20')+flip(y1)+H('11')+x2+H('21')+flip(y2));
+      } else if(t==='rect'){
+        const x=+el.getAttribute('x')||0,y=+el.getAttribute('y')||0,w=+el.getAttribute('width')||0,h=+el.getAttribute('height')||0;
+        if(!w||!h) return;
+        const pts=[[x,y],[x+w,y],[x+w,y+h],[x,y+h]];
+        pts.forEach((p,i)=>{
+          const q=pts[(i+1)%4];
+          cuerpo.push(H('LINE')+H('8')+capa+H('10')+p[0]+H('20')+flip(p[1])+H('11')+q[0]+H('21')+flip(q[1]));
+        });
+      } else if(t==='circle'){
+        const cx=+el.getAttribute('cx'),cy=+el.getAttribute('cy'),r=+el.getAttribute('r');
+        if([cx,cy,r].some(isNaN)) return;
+        cuerpo.push(H('CIRCLE')+H('8')+capa+H('10')+cx+H('20')+flip(cy)+H('40')+r);
+      } else if(t==='text'){
+        const x=+el.getAttribute('x'),y=+el.getAttribute('y');
+        if([x,y].some(isNaN)) return;
+        const s=(el.textContent||'').replace(/\s+/g,' ').trim();
+        if(!s) return;
+        cuerpo.push(H('TEXT')+H('8')+'TEXTO'+H('10')+x+H('20')+flip(y)+H('40')+'2.5'+H('1')+s);
+      }
+    });
+    bloques.push(H('BLOCK')+H('8')+'0'+H('2')+nom+H('70')+'0'+H('10')+'0'+H('20')+'0'+cuerpo.join('')+H('ENDBLK'));
+  });
+
+  ent.push(H('SECTION')+H('BLOCKS')+bloques.join('')+H('ENDSEC'));
+  const ins = [];
+  document.querySelectorAll('.hoja svg').forEach((s,i)=>{
+    const nom = 'L-'+String(i+1).padStart(2,'0');
+    ins.push(H('INSERT')+H('8')+nom+H('2')+nom+H('10')+((i%2)*1300)+H('20')+(-Math.floor(i/2)*900)+H('30')+'0');
+  });
+  ent.push(H('SECTION')+H('ENTITIES')+ins.join('')+H('ENDSEC')+H('EOF'));
+
+  descargar('planos_NPR_Transbank.dxf', ent.join(''), 'application/dxf');
+}
+</script>
+</body>
+</html>
